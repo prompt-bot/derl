@@ -39,7 +39,7 @@ RUN curl -o /usr/local/bin/patchelf https://s3-us-west-2.amazonaws.com/openai-sc
 ENV LANG C.UTF-8
 
 RUN mkdir -p /user/.mujoco \
-    && wget https://www.roboti.us/download/mujoco200_linux.zip -O mujoco.zip \
+    && wget --no-check-certificate https://www.roboti.us/download/mujoco200_linux.zip -O mujoco.zip \
     && unzip mujoco.zip -d /user/.mujoco \
     && mv /user/.mujoco/mujoco200_linux /user/.mujoco/mujoco200 \
     && rm mujoco.zip
