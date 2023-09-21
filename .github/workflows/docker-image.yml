@@ -32,7 +32,7 @@ jobs:
           context: .
           file: ./docker/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/derl:$IMAGE_TAG
+          tags: ${{ secrets.DOCKER_USERNAME }}/derl:${{ env.IMAGE_TAG }}
           build-args: |
             PARENT_IMAGE=ubuntu:16.04
             TORCH=cpuonly
