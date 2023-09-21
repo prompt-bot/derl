@@ -26,9 +26,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          dockerfile: path/to/Dockerfile
+          dockerfile: docker/Dockerfile
           push: true
-          tags: your-username/your-repo:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/derl:latest
           build-args: |
             PARENT_IMAGE=ubuntu:16.04
             TORCH=cpuonly
