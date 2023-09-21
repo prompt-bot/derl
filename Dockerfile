@@ -38,11 +38,22 @@ RUN curl -o /usr/local/bin/patchelf https://s3-us-west-2.amazonaws.com/openai-sc
 
 ENV LANG C.UTF-8
 
+# RUN mkdir -p /user/.mujoco \
+#     && wget --no-check-certificate https://www.roboti.us/download/mujoco200_linux.zip -O mujoco.zip \
+#     && unzip mujoco.zip -d /user/.mujoco \
+#     && mv /user/.mujoco/mujoco200_linux /user/.mujoco/mujoco200 \
+#     && rm mujoco.zip
+# COPY docker/mjkey.txt /user/.mujoco/
+# ENV LD_LIBRARY_PATH /user/.mujoco/mujoco200/bin:${LD_LIBRARY_PATH}
+# ENV LD_LIBRARY_PATH /usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
+# ENV MUJOCO_PY_MUJOCO_PATH /user/.mujoco/mujoco200
+# ENV MUJOCO_PY_MJKEY_PATH /user/.mujoco/mjkey.txt
+
 RUN mkdir -p /user/.mujoco \
-    && wget --no-check-certificate https://www.roboti.us/download/mujoco200_linux.zip -O mujoco.zip \
-    && unzip mujoco.zip -d /user/.mujoco \
-    && mv /user/.mujoco/mujoco200_linux /user/.mujoco/mujoco200 \
-    && rm mujoco.zip
+    && wget https://github.com/google-deepmind/mujoco/releases/download/2.3.7/mujoco-2.3.7-linux-x86_64.tar.gz -O mujoco.tar.gz \
+    && tar zxf mujoco.tar.gz \
+    && mv ./mujoco-2.3.7 /user/.mujoco/mujoco200 \
+    && rm mujoco.tar.gz
 COPY docker/mjkey.txt /user/.mujoco/
 ENV LD_LIBRARY_PATH /user/.mujoco/mujoco200/bin:${LD_LIBRARY_PATH}
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
