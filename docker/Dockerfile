@@ -50,11 +50,11 @@ RUN mv /user/.mujoco/mujoco200_linux /user/.mujoco/mujoco200 \
 
 
 COPY docker/mjkey.txt /user/.mujoco/
-# ENV LD_LIBRARY_PATH /user/.mujoco/mujoco200/bin:${LD_LIBRARY_PATH}
-ENV LD_LIBRARY_PATH /user/.mujoco/mujoco210/bin:${LD_LIBRARY_PATH}
+ENV LD_LIBRARY_PATH /user/.mujoco/mujoco200/bin:${LD_LIBRARY_PATH}
+# ENV LD_LIBRARY_PATH /user/.mujoco/mujoco210/bin:${LD_LIBRARY_PATH}
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
-# ENV MUJOCO_PY_MUJOCO_PATH /user/.mujoco/mujoco200
-ENV MUJOCO_PY_MUJOCO_PATH /user/.mujoco/mujoco210
+ENV MUJOCO_PY_MUJOCO_PATH /user/.mujoco/mujoco200
+# ENV MUJOCO_PY_MUJOCO_PATH /user/.mujoco/mujoco210
 ENV MUJOCO_PY_MJKEY_PATH /user/.mujoco/mjkey.txt
 
 COPY docker/build_files/Xdummy /usr/local/bin/Xdummy
@@ -78,7 +78,7 @@ ENV PATH=/user/miniconda/envs/docker_env/bin:${PATH}
 RUN /bin/bash -c ". activate docker_env; conda install pytorch ${TORCH} -c pytorch"
 
 COPY docker/build_files/requirements.txt /user/derl/docker/build_files/requirements.txt
-RUN /bin/bash -c ". activate docker_env; cd derl/docker/build_files; pip install -r requirements.txt"
+RUN /bin/bash -c ". activate docker_env; cd derl/docker/build_files; pip install -r requirements.txt; pip install Cython==3.0.0a10"
 
 # Copy the code in the very end
 COPY derl /user/derl/derl
